@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +10,8 @@ import 'package:messenger_demo/firebase_options.dart';
 import 'package:messenger_demo/messenger_demo_app.dart';
 import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 import 'package:talker_flutter/talker_flutter.dart';
+
+bool shouldUseFirebaseEmulator = false;
 
 void main() {
   runZonedGuarded(() async {
@@ -21,10 +24,18 @@ void main() {
     const settingsBoxName = 'settings_box';
     await Hive.initFlutter();
     final settingsBox = await Hive.openBox<dynamic>(settingsBoxName);
+    GetIt.I.registerSingleton(settingsBox);
 
-    await Firebase.initializeApp(
+    final FirebaseApp firebaseApp = await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+    GetIt.I.registerSingleton(firebaseApp);
+    final FirebaseAuth firebaseAuth = FirebaseAuth.instanceFor(app: GetIt.I<FirebaseApp>());
+    GetIt.I.registerSingleton(firebaseAuth);
+
+    if (shouldUseFirebaseEmulator) {
+      await GetIt.I<FirebaseAuth>().useAuthEmulator('localhost', 9099);
+    }
 
     Bloc.observer = TalkerBlocObserver(
       talker: talker,
