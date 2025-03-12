@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:messenger_demo/core/strings/hive_strings.dart';
 import 'package:messenger_demo/firebase_options.dart';
 import 'package:messenger_demo/messenger_demo_app.dart';
 import 'package:talker_bloc_logger/talker_bloc_logger.dart';
@@ -21,10 +22,8 @@ void main() {
     GetIt.I.registerSingleton(talker);
     GetIt.I<Talker>().debug('Talker started...');
 
-    const settingsBoxName = 'settings_box';
     await Hive.initFlutter();
-    final settingsBox = await Hive.openBox<dynamic>(settingsBoxName);
-    GetIt.I.registerSingleton(settingsBox);
+    await Hive.openBox<Map<String, dynamic>>(HiveStrings.settingsBoxName);
 
     final FirebaseApp firebaseApp = await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
