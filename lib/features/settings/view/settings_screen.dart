@@ -27,7 +27,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   _themeSwitch(context: context, box: box),
                   Divider(),
-                  Divider(),
                   Text("Version: ${box.get(HiveStrings.versionPath)}"),
                   Text("Build: ${(box.get(HiveStrings.buildNumberPath) == "" ? "-" : box.get(HiveStrings.buildNumberPath))}"),
                   Text("by QUSAD.prod"),
