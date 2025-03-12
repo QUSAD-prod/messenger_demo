@@ -29,7 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Divider(),
                   Divider(),
                   Text("Version: ${box.get(HiveStrings.versionPath)}"),
-                  Text("Build: ${box.get(HiveStrings.buildNumberPath) == "" ? "-" : box.get(HiveStrings.buildNumberPath)}"),
+                  Text("Build: ${(box.get(HiveStrings.buildNumberPath) == "" ? "-" : box.get(HiveStrings.buildNumberPath))}"),
                   Text("by QUSAD.prod"),
                 ],
               ),
