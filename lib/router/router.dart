@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:messenger_demo/features/auth/view/auth_screen.dart';
 import 'package:messenger_demo/features/home/view/home_screen.dart';
+import 'package:messenger_demo/features/logs/view/logs_screen.dart';
 import 'package:messenger_demo/features/settings/view/settings_screen.dart';
 
 part 'router.gr.dart';
@@ -15,6 +16,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: HomeRoute.page, path: '/'),
         AutoRoute(page: AuthRoute.page),
         AutoRoute(page: SettingsRoute.page),
+        AutoRoute(page: LogsRoute.page),
       ];
 
   @override

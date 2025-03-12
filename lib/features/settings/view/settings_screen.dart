@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:messenger_demo/core/strings/hive_strings.dart';
+import 'package:messenger_demo/router/router.dart';
 
 @RoutePage()
 class SettingsScreen extends StatefulWidget {
@@ -26,6 +27,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: Column(
                 children: [
                   _themeSwitch(context: context, box: box),
+                  Divider(),
+                  _devGroup(),
                   Divider(),
                   Text("Version: ${box.get(HiveStrings.versionPath)}"),
                   Text("Build: ${(box.get(HiveStrings.buildNumberPath) == "" ? "-" : box.get(HiveStrings.buildNumberPath))}"),
@@ -65,6 +68,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
           value: HiveStrings.themeSystem,
           groupValue: currentValue,
           onChanged: (value) => box.put(HiveStrings.themePath, HiveStrings.themeSystem),
+        ),
+      ],
+    );
+  }
+
+  Widget _devGroup() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0, top: 8.0),
+          child: Text("For developers"),
+        ),
+        ListTile(
+          title: Text("Open logs"),
+          onTap: () => AutoRouter.of(context).push(const LogsRoute()),
         ),
       ],
     );
