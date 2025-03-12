@@ -17,6 +17,7 @@ class _MessengerDemoAppState extends State<MessengerDemoApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'MessengerDemo',
+      themeMode: ThemeMode.dark,
       routerConfig: _appRouter.config(
         navigatorObservers: () => [
           TalkerRouteObserver(GetIt.I<Talker>()),

@@ -10,30 +10,33 @@ import 'package:messenger_demo/messenger_demo_app.dart';
 import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+void main() {
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
 
-  final talker = TalkerFlutter.init();
-  GetIt.I.registerSingleton(talker);
-  GetIt.I<Talker>().debug('Talker started...');
+    final talker = TalkerFlutter.init();
+    GetIt.I.registerSingleton(talker);
+    GetIt.I<Talker>().debug('Talker started...');
 
-  await Hive.initFlutter();
-  const settingsBoxName = 'settings_box';
-  final settingsBox = await Hive.openBox<dynamic>(settingsBoxName);
+    const settingsBoxName = 'settings_box';
+    await Hive.initFlutter();
+    final settingsBox = await Hive.openBox<dynamic>(settingsBoxName);
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
-  Bloc.observer = TalkerBlocObserver(
-    talker: talker,
-    settings: const TalkerBlocLoggerSettings(),
-  );
+    Bloc.observer = TalkerBlocObserver(
+      talker: talker,
+      settings: const TalkerBlocLoggerSettings(),
+    );
 
-  FlutterError.onError = (details) => GetIt.I<Talker>().handle(details.exception, details.stack);
+    FlutterError.onError = (details) {
+      GetIt.I<Talker>().handle(details.exception, details.stack);
+    };
 
-  runZonedGuarded(
-    () => runApp(const MessengerDemoApp()),
-    (e, st) => GetIt.I<Talker>().handle(e, st),
-  );
+    runApp(const MessengerDemoApp());
+  }, (error, stackTrace) {
+    GetIt.I<Talker>().handle(error, stackTrace);
+  });
 }
