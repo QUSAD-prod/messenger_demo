@@ -13,6 +13,12 @@ class GlobalTheme {
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.lightAppBarBackground,
       foregroundColor: AppColors.lightPrimaryText,
+      centerTitle: false,
+      titleTextStyle: TextStyle(
+        fontSize: 32,
+        fontWeight: FontWeight.w600,
+        color: AppColors.lightPrimaryText,
+      ),
     ),
     textTheme: TextTheme(
       bodyLarge: TextStyle(color: AppColors.lightPrimaryText),
@@ -35,6 +41,12 @@ class GlobalTheme {
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.darkAppBarBackground,
       foregroundColor: AppColors.darkPrimaryText,
+      centerTitle: false,
+      titleTextStyle: TextStyle(
+        fontSize: 32,
+        fontWeight: FontWeight.w600,
+        color: AppColors.darkPrimaryText,
+      ),
     ),
     textTheme: TextTheme(
       bodyLarge: TextStyle(color: AppColors.darkPrimaryText),

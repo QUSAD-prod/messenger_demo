@@ -1,1 +1,31 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"messenger-demo-b81a5","appId":"1:391513192554:android:31e13179b7cb61f4a97213","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"messenger-demo-b81a5","configurations":{"android":"1:391513192554:android:31e13179b7cb61f4a97213","ios":"1:391513192554:ios:dd9294777d48c417a97213"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "messenger-demo-b81a5",
+          "appId": "1:391513192554:android:31e13179b7cb61f4a97213",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "messenger-demo-b81a5",
+          "configurations": {
+            "android": "1:391513192554:android:31e13179b7cb61f4a97213",
+            "ios": "1:391513192554:ios:dd9294777d48c417a97213"
+          }
+        }
+      }
+    }
+  },
+  "emulators": {
+    "auth": {
+      "port": 9099
+    },
+    "ui": {
+      "enabled": true
+    },
+    "singleProjectMode": true
+  }
+}

@@ -15,10 +15,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text("Чаты"),
         actions: [
           IconButton(
             onPressed: () => AutoRouter.of(context).push(const SettingsRoute()),
-            tooltip: "Settings",
+            tooltip: "Настройки",
             icon: Icon(Icons.settings),
           ),
         ],

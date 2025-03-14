@@ -5,7 +5,7 @@ class AppColors {
   static const Color lightBackground = Color(0xFFFFFFFF);
   static const Color lightAppBarBackground = Color(0xFFFFFFFF);
   static const Color lightChatBackground = Color(0xFFFFFFFF);
-  static const Color lightPrimaryText = Color(0xFF000000);
+  static const Color lightPrimaryText = Color(0xFF2B333E);
   static const Color lightSecondaryText = Color(0xFF757575);
   static const Color lightIncomingMessageText = Color(0xFF000000);
   static const Color lightOutgoingMessageText = Color(0xFFFFFFFF);

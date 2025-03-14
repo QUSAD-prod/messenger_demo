@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:messenger_demo/features/auth/view/auth_screen.dart';
+import 'package:messenger_demo/features/auth/welcome/view/welcome_screen.dart';
 import 'package:messenger_demo/features/home/view/home_screen.dart';
 import 'package:messenger_demo/features/logs/view/logs_screen.dart';
 import 'package:messenger_demo/features/settings/view/settings_screen.dart';
+import 'package:messenger_demo/router/auth_guard.dart';
 
 part 'router.gr.dart';
 
@@ -12,15 +13,30 @@ class AppRouter extends RootStackRouter {
   RouteType get defaultRouteType => RouteType.adaptive();
 
   @override
-  List<AutoRoute> get routes => [
-        AutoRoute(page: HomeRoute.page, path: '/'),
-        AutoRoute(page: AuthRoute.page),
-        AutoRoute(page: SettingsRoute.page),
-        AutoRoute(page: LogsRoute.page),
-      ];
-
-  @override
-  List<AutoRouteGuard> get guards => [
-        // optionally add root guards here
-      ];
+  List<AutoRoute> get routes {
+    return [
+      AutoRoute(
+        page: HomeRoute.page,
+        path: '/',
+        guards: [
+          AuthGuard(),
+        ],
+      ),
+      AutoRoute(
+        page: WelcomeRoute.page,
+      ),
+      AutoRoute(
+        page: SettingsRoute.page,
+        guards: [
+          AuthGuard(),
+        ],
+      ),
+      AutoRoute(
+        page: LogsRoute.page,
+        guards: [
+          AuthGuard(),
+        ],
+      ),
+    ];
+  }
 }

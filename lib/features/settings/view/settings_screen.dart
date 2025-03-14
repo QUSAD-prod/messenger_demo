@@ -17,7 +17,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: Text('Настройки'),
       ),
       body: ValueListenableBuilder(
         valueListenable: Hive.box(HiveStrings.settingsBoxName).listenable(),
@@ -30,8 +30,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Divider(),
                   _devGroup(),
                   Divider(),
-                  Text("Version: ${box.get(HiveStrings.versionPath)}"),
-                  Text("Build: ${(box.get(HiveStrings.buildNumberPath) == "" ? "-" : box.get(HiveStrings.buildNumberPath))}"),
+                  Text("Версия приложения: ${box.get(HiveStrings.versionPath)}"),
+                  Text("Номер сборки: ${(box.get(HiveStrings.buildNumberPath) == "" ? "-" : box.get(HiveStrings.buildNumberPath))}"),
                   Text("by QUSAD.prod"),
                 ],
               ),
@@ -49,22 +49,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 16.0, top: 8.0),
-          child: Text("Theme mode"),
+          child: Text("Тема"),
         ),
         RadioListTile(
-          title: Text("Light"),
+          title: Text("Светлая"),
           value: HiveStrings.themeLight,
           groupValue: currentValue,
           onChanged: (value) => box.put(HiveStrings.themePath, HiveStrings.themeLight),
         ),
         RadioListTile(
-          title: Text("Dark"),
+          title: Text("Тёмная"),
           value: HiveStrings.themeDark,
           groupValue: currentValue,
           onChanged: (value) => box.put(HiveStrings.themePath, HiveStrings.themeDark),
         ),
         RadioListTile(
-          title: Text("System"),
+          title: Text("Системная"),
           value: HiveStrings.themeSystem,
           groupValue: currentValue,
           onChanged: (value) => box.put(HiveStrings.themePath, HiveStrings.themeSystem),
@@ -79,10 +79,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 16.0, top: 8.0),
-          child: Text("For developers"),
+          child: Text("Для разработчиков"),
         ),
         ListTile(
-          title: Text("Open logs"),
+          title: Text("Открыть логи"),
           onTap: () => AutoRouter.of(context).push(const LogsRoute()),
         ),
       ],
