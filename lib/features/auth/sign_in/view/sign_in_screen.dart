@@ -1,6 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger_demo/core/widgets/unable_dialogs.dart';
 import 'package:messenger_demo/features/auth/widgets/social_login_buttons.dart';
@@ -18,20 +16,27 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 28.0),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Spacer(flex: 2),
-              Text(
-                "Войдите в свой аккаунт",
-                style: TextTheme.of(context).headlineMedium?.copyWith(fontWeight: FontWeight.w600),
-                textAlign: TextAlign.center,
+              Spacer(),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 12.0),
+                width: double.infinity,
+                child: FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(
+                    "Войдите в свой аккаунт",
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                ),
               ),
-              Spacer(flex: 1),
+              Spacer(),
               TextFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -58,7 +63,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           "Войти",
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
-                            fontSize: 14,
+                            fontSize: 16,
                           ),
                         ),
                       ),
@@ -72,7 +77,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         "Забыли Пароль?",
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          fontSize: 14,
+                          fontSize: 16,
                         ),
                       ),
                     ),
@@ -102,7 +107,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   "Нет аккаунта? Зарегистрироваться",
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 14,
+                    fontSize: 16,
                   ),
                 ),
               ),

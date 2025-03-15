@@ -19,7 +19,7 @@ class SocialLoginButtons {
 
   static Widget apple({
     required VoidCallback onPressed,
-    String text = 'Continue with Apple',
+    String text = 'Continue with Apple ID',
     SocialLoginButtonStyle style = SocialLoginButtonStyle.white,
     bool isLoading = false,
   }) {
@@ -111,7 +111,7 @@ class SocialLoginButton extends StatelessWidget {
               text,
               style: TextStyle(
                 color: _foregroundColor,
-                fontSize: 14.0,
+                fontSize: 16.0,
                 fontWeight: FontWeight.w600,
               ),
             ),

@@ -16,20 +16,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 28.0),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Spacer(flex: 2),
-              Text(
-                "Создайте новый аккаунт",
-                style: TextTheme.of(context).headlineMedium?.copyWith(fontWeight: FontWeight.w600),
-                textAlign: TextAlign.center,
+              Spacer(),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 12.0),
+                width: double.infinity,
+                child: FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(
+                    "Создайте новый аккаунт",
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                ),
               ),
-              Spacer(flex: 1),
+              Spacer(),
               TextFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -52,7 +59,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     "Зарегистрироваться",
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 14,
+                      fontSize: 16,
                     ),
                   ),
                 ),
@@ -82,7 +89,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   "Уже есть аккаунт? Войти",
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 14,
+                    fontSize: 16,
                   ),
                 ),
               ),
