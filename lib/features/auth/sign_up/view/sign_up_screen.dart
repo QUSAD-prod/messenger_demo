@@ -12,6 +12,19 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Создайте аккаунт",
+          style: TextStyle(fontSize: 24.0),
+        ),
+      ),
+      body: Center(
+        child: Text(
+          "Нет аккаунта?\nНу и пошёл ты нахуй!",
+          style: TextTheme.of(context).headlineSmall?.copyWith(fontWeight: FontWeight.w500),
+        ),
+      ),
+    );
   }
 }

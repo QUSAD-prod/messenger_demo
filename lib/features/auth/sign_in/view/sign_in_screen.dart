@@ -12,6 +12,13 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Войдите в свой аккаунт",
+          style: TextStyle(fontSize: 24.0),
+        ),
+      ),
+    );
   }
 }

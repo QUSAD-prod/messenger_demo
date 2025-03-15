@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:messenger_demo/router/router.dart';
 
 @RoutePage()
 class WelcomeScreen extends StatefulWidget {
@@ -35,13 +36,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Spacer(flex: 1),
             IconButton.filled(
-              onPressed: () => {},
+              onPressed: () => AutoRouter.of(context).push(const SignInRoute()),
               icon: Icon(Icons.navigate_next),
               iconSize: 36.0,
+              tooltip: "Вход в аккаунт",
             ),
             Spacer(flex: 13),
             TextButton(
-              onPressed: () {},
+              onPressed: () => AutoRouter.of(context).push(const SignUpRoute()),
               child: Text(
                 "Нет аккаунта? Зарегистрироваться",
                 style: TextStyle(
