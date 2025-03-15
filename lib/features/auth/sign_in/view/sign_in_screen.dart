@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:messenger_demo/features/auth/widgets/social_login_buttons.dart';
 import 'package:messenger_demo/router/router.dart';
 
 @RoutePage()
@@ -26,6 +27,18 @@ class _SignInScreenState extends State<SignInScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
+              Spacer(),
+              SocialLoginButtons.google(
+                style: Theme.of(context).brightness == Brightness.light ? SocialLoginButtonStyle.black : SocialLoginButtonStyle.black,
+                onPressed: () {},
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              SocialLoginButtons.apple(
+                style: Theme.of(context).brightness == Brightness.light ? SocialLoginButtonStyle.black : SocialLoginButtonStyle.black,
+                onPressed: () {},
+              ),
               Spacer(),
               TextButton(
                 onPressed: () => AutoRouter.of(context).replace(const SignUpRoute()),
