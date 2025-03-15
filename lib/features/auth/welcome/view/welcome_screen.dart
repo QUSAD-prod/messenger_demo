@@ -16,42 +16,44 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Spacer(flex: 15),
-            Text(
-              "Добро пожаловать!",
-              style: TextTheme.of(context).headlineLarge?.copyWith(fontWeight: FontWeight.w600),
-              textAlign: TextAlign.center,
-            ),
-            Spacer(flex: 1),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40.0),
-              child: Text(
-                "Перед началом общения нужно войти в аккаунт",
-                style: TextTheme.of(context).headlineSmall?.copyWith(fontWeight: FontWeight.w400),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Spacer(flex: 15),
+              Text(
+                "Добро пожаловать в\nQUSAD Message!",
+                style: TextTheme.of(context).headlineMedium?.copyWith(fontWeight: FontWeight.w600),
                 textAlign: TextAlign.center,
               ),
-            ),
-            Spacer(flex: 1),
-            IconButton.filled(
-              onPressed: () => AutoRouter.of(context).push(const SignInRoute()),
-              icon: Icon(Icons.navigate_next),
-              iconSize: 36.0,
-              tooltip: "Вход в аккаунт",
-            ),
-            Spacer(flex: 13),
-            TextButton(
-              onPressed: () => AutoRouter.of(context).push(const SignUpRoute()),
-              child: Text(
-                "Нет аккаунта? Зарегистрироваться",
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
+              Spacer(flex: 1),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40.0),
+                child: Text(
+                  "Перед началом общения нужно войти в аккаунт",
+                  style: TextTheme.of(context).headlineSmall?.copyWith(fontWeight: FontWeight.w400),
+                  textAlign: TextAlign.center,
                 ),
               ),
-            ),
-          ],
+              Spacer(flex: 1),
+              IconButton.filled(
+                onPressed: () => AutoRouter.of(context).push(const SignInRoute()),
+                icon: Icon(Icons.navigate_next),
+                iconSize: 36.0,
+                tooltip: "Вход в аккаунт",
+              ),
+              Spacer(flex: 13),
+              TextButton(
+                onPressed: () => AutoRouter.of(context).push(const SignUpRoute()),
+                child: Text(
+                  "Нет аккаунта? Зарегистрироваться",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
