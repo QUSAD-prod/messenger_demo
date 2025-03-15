@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:messenger_demo/core/theme/colors.dart';
 import 'package:messenger_demo/features/auth/widgets/loading_indicator.dart';
 
 class SocialLoginButtons {
