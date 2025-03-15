@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:messenger_demo/core/widgets/unable_dialogs.dart';
 import 'package:messenger_demo/features/auth/widgets/social_login_buttons.dart';
 import 'package:messenger_demo/router/router.dart';
 
@@ -15,19 +16,54 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Создайте аккаунт",
-          style: TextStyle(fontSize: 24.0),
-        ),
-      ),
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Spacer(),
+              Spacer(flex: 2),
+              Text(
+                "Создайте новый аккаунт",
+                style: TextTheme.of(context).headlineMedium?.copyWith(fontWeight: FontWeight.w600),
+                textAlign: TextAlign.center,
+              ),
+              Spacer(flex: 1),
+              TextFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "E-mail",
+                ),
+              ),
+              SizedBox(height: 8.0),
+              TextFormField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "Пароль",
+                ),
+              ),
+              SizedBox(height: 12.0),
+              FilledButton(
+                onPressed: () {},
+                child: Center(
+                  child: Text(
+                    "Зарегистрироваться",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: Divider(
+                  height: 0.5,
+                  color: Theme.of(context).brightness == Brightness.light ? Colors.black.withAlpha(75) : Colors.white.withAlpha(75),
+                ),
+              ),
               SocialLoginButtons.google(
                 style: Theme.of(context).brightness == Brightness.light ? SocialLoginButtonStyle.black : SocialLoginButtonStyle.white,
                 onPressed: () {},
@@ -37,15 +73,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               SocialLoginButtons.apple(
                 style: Theme.of(context).brightness == Brightness.light ? SocialLoginButtonStyle.black : SocialLoginButtonStyle.white,
-                onPressed: () {},
+                onPressed: () => UnableDialogs.show(context), //TODO add
               ),
-              Spacer(),
+              Spacer(flex: 2),
               TextButton(
                 onPressed: () => AutoRouter.of(context).replace(const SignInRoute()),
                 child: Text(
                   "Уже есть аккаунт? Войти",
                   style: TextStyle(
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
                   ),
                 ),
               ),

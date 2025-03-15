@@ -48,7 +48,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: Text(
                   "Нет аккаунта? Зарегистрироваться",
                   style: TextStyle(
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
                   ),
                 ),
               ),
