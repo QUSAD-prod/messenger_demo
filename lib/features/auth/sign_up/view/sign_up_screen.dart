@@ -29,14 +29,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
             children: [
               Spacer(),
               SocialLoginButtons.google(
-                style: Theme.of(context).brightness == Brightness.light ? SocialLoginButtonStyle.black : SocialLoginButtonStyle.black,
+                style: Theme.of(context).brightness == Brightness.light ? SocialLoginButtonStyle.black : SocialLoginButtonStyle.white,
                 onPressed: () {},
               ),
               SizedBox(
                 height: 8.0,
               ),
               SocialLoginButtons.apple(
-                style: Theme.of(context).brightness == Brightness.light ? SocialLoginButtonStyle.black : SocialLoginButtonStyle.black,
+                style: Theme.of(context).brightness == Brightness.light ? SocialLoginButtonStyle.black : SocialLoginButtonStyle.white,
                 onPressed: () {},
               ),
               Spacer(),

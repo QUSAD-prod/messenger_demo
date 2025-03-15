@@ -21,7 +21,7 @@ class AppColors {
 
   // Темная тема
   static const Color darkBackground = Color(0xFF121212);
-  static const Color darkAppBarBackground = Color(0xFF1F1F1F);
+  static const Color darkAppBarBackground = Color(0xFF121212);
   static const Color darkChatBackground = Color(0xFF1E1E1E);
   static const Color darkPrimaryText = Color(0xFFFFFFFF);
   static const Color darkSecondaryText = Color(0xFFBDBDBD);
