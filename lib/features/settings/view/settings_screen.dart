@@ -5,7 +5,6 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:messenger_demo/core/strings/hive_strings.dart';
 import 'package:messenger_demo/features/settings/widgets/settings_divider.dart';
-import 'package:messenger_demo/features/settings/widgets/settings_outline_button.dart';
 import 'package:messenger_demo/features/settings/widgets/settings_title_widget.dart';
 import 'package:messenger_demo/router/router.dart';
 
