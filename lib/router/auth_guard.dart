@@ -11,7 +11,7 @@ class AuthGuard extends AutoRouteGuard {
     if (GetIt.I<FirebaseAuth>().currentUser != null) {
       resolver.next(true);
     } else {
-      router.push(const WelcomeRoute());
+      resolver.redirectUntil(const WelcomeRoute());
     }
   }
 }

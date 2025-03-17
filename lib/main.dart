@@ -40,7 +40,9 @@ void main() {
       options: DefaultFirebaseOptions.currentPlatform,
     );
     GetIt.I.registerSingleton(firebaseApp);
-    final FirebaseAuth firebaseAuth = FirebaseAuth.instanceFor(app: GetIt.I<FirebaseApp>());
+    final FirebaseAuth firebaseAuth = FirebaseAuth.instanceFor(
+      app: GetIt.I<FirebaseApp>(),
+    );
     GetIt.I.registerSingleton(firebaseAuth);
 
     if (shouldUseFirebaseEmulator) {

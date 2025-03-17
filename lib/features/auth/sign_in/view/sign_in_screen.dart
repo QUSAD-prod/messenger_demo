@@ -102,7 +102,7 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               Spacer(flex: 2),
               TextButton(
-                onPressed: () => AutoRouter.of(context).replace(const SignUpRoute()),
+                onPressed: () => context.replaceRoute(const SignUpRoute()),
                 child: Text(
                   "Нет аккаунта? Зарегистрироваться",
                   style: TextStyle(

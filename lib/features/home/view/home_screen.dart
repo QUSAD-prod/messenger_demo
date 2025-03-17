@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text("Чаты"),
         actions: [
           IconButton(
-            onPressed: () => AutoRouter.of(context).push(const SettingsRoute()),
+            onPressed: () => context.pushRoute(const SettingsRoute()),
             tooltip: "Настройки",
             icon: Icon(Icons.settings),
           ),

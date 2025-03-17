@@ -84,7 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               Spacer(flex: 2),
               TextButton(
-                onPressed: () => AutoRouter.of(context).replace(const SignInRoute()),
+                onPressed: () => context.replaceRoute(const SignInRoute()),
                 child: Text(
                   "Уже есть аккаунт? Войти",
                   style: TextStyle(

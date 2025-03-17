@@ -13,7 +13,8 @@ part of 'router.dart';
 /// generated route for
 /// [HomeScreen]
 class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children}) : super(HomeRoute.name, initialChildren: children);
+  const HomeRoute({List<PageRouteInfo>? children})
+    : super(HomeRoute.name, initialChildren: children);
 
   static const String name = 'HomeRoute';
 
@@ -28,7 +29,8 @@ class HomeRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [LogsScreen]
 class LogsRoute extends PageRouteInfo<void> {
-  const LogsRoute({List<PageRouteInfo>? children}) : super(LogsRoute.name, initialChildren: children);
+  const LogsRoute({List<PageRouteInfo>? children})
+    : super(LogsRoute.name, initialChildren: children);
 
   static const String name = 'LogsRoute';
 
@@ -43,7 +45,8 @@ class LogsRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [SettingsScreen]
 class SettingsRoute extends PageRouteInfo<void> {
-  const SettingsRoute({List<PageRouteInfo>? children}) : super(SettingsRoute.name, initialChildren: children);
+  const SettingsRoute({List<PageRouteInfo>? children})
+    : super(SettingsRoute.name, initialChildren: children);
 
   static const String name = 'SettingsRoute';
 
@@ -58,7 +61,8 @@ class SettingsRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [SignInScreen]
 class SignInRoute extends PageRouteInfo<void> {
-  const SignInRoute({List<PageRouteInfo>? children}) : super(SignInRoute.name, initialChildren: children);
+  const SignInRoute({List<PageRouteInfo>? children})
+    : super(SignInRoute.name, initialChildren: children);
 
   static const String name = 'SignInRoute';
 
@@ -73,7 +77,8 @@ class SignInRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [SignUpScreen]
 class SignUpRoute extends PageRouteInfo<void> {
-  const SignUpRoute({List<PageRouteInfo>? children}) : super(SignUpRoute.name, initialChildren: children);
+  const SignUpRoute({List<PageRouteInfo>? children})
+    : super(SignUpRoute.name, initialChildren: children);
 
   static const String name = 'SignUpRoute';
 
@@ -88,7 +93,8 @@ class SignUpRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [WelcomeScreen]
 class WelcomeRoute extends PageRouteInfo<void> {
-  const WelcomeRoute({List<PageRouteInfo>? children}) : super(WelcomeRoute.name, initialChildren: children);
+  const WelcomeRoute({List<PageRouteInfo>? children})
+    : super(WelcomeRoute.name, initialChildren: children);
 
   static const String name = 'WelcomeRoute';
 

@@ -1,7 +1,12 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:messenger_demo/core/strings/hive_strings.dart';
+import 'package:messenger_demo/features/settings/widgets/settings_divider.dart';
+import 'package:messenger_demo/features/settings/widgets/settings_outline_button.dart';
+import 'package:messenger_demo/features/settings/widgets/settings_title_widget.dart';
 import 'package:messenger_demo/router/router.dart';
 
 @RoutePage()
@@ -26,13 +31,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Center(
               child: Column(
                 children: [
-                  _themeSwitch(context: context, box: box),
-                  Divider(),
+                  _themeGroup(context: context, box: box),
+                  SettingsDivider(),
+                  _accountGroup(),
+                  SettingsDivider(),
                   _devGroup(),
-                  Divider(),
-                  Text("Версия приложения: ${box.get(HiveStrings.versionPath)}"),
-                  Text("Номер сборки: ${(box.get(HiveStrings.buildNumberPath) == "" ? "-" : box.get(HiveStrings.buildNumberPath))}"),
-                  Text("by QUSAD.prod"),
+                  SettingsDivider(),
+                  _aboutGroup(box: box),
                 ],
               ),
             ),
@@ -42,29 +47,64 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Widget _themeSwitch({required BuildContext context, required Box box}) {
+  Column _aboutGroup({required Box<dynamic> box}) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text("Версия приложения: ${box.get(HiveStrings.versionPath)}"),
+        Text("Номер сборки: ${(box.get(HiveStrings.buildNumberPath) == "" ? "-" : box.get(HiveStrings.buildNumberPath))}"),
+        Text("by QUSAD.prod"),
+      ],
+    );
+  }
+
+  Widget _accountGroup() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SettingsTitleWidget(title: "Настройки аккаунта"),
+        ListTile(
+          trailing: Icon(Icons.logout_outlined),
+          title: Text("Выйти из аккаунта"),
+          onTap: () async {
+            await GetIt.I<FirebaseAuth>().signOut(); //TODO
+          },
+        ),
+        ListTile(
+          trailing: Icon(Icons.delete_outlined),
+          title: Text("Удалить аккаунт"),
+          onTap: () async {
+            //TODO
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _themeGroup({required BuildContext context, required Box box}) {
     String currentValue = box.get(HiveStrings.themePath, defaultValue: HiveStrings.themeSystem);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 16.0, top: 8.0),
-          child: Text("Тема"),
-        ),
+        SettingsTitleWidget(title: "Тема"),
         RadioListTile(
           title: Text("Светлая"),
+          secondary: Icon(Icons.light_mode_outlined),
           value: HiveStrings.themeLight,
           groupValue: currentValue,
           onChanged: (value) => box.put(HiveStrings.themePath, HiveStrings.themeLight),
         ),
         RadioListTile(
           title: Text("Тёмная"),
+          secondary: Icon(Icons.mode_night_outlined),
           value: HiveStrings.themeDark,
           groupValue: currentValue,
           onChanged: (value) => box.put(HiveStrings.themePath, HiveStrings.themeDark),
         ),
         RadioListTile(
           title: Text("Системная"),
+          secondary: Icon(Icons.sync_outlined),
           value: HiveStrings.themeSystem,
           groupValue: currentValue,
           onChanged: (value) => box.put(HiveStrings.themePath, HiveStrings.themeSystem),
@@ -77,13 +117,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 16.0, top: 8.0),
-          child: Text("Для разработчиков"),
-        ),
+        SettingsTitleWidget(title: "Для разработчиков"),
         ListTile(
+          trailing: Icon(Icons.terminal_outlined),
           title: Text("Открыть логи"),
-          onTap: () => AutoRouter.of(context).push(const LogsRoute()),
+          onTap: () => context.pushRoute(const LogsRoute()),
         ),
       ],
     );

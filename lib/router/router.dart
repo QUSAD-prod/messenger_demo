@@ -9,42 +9,39 @@ import 'package:messenger_demo/router/auth_guard.dart';
 
 part 'router.gr.dart';
 
-@AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
+@AutoRouterConfig(
+  replaceInRouteName: 'Screen|Page,Route',
+)
 class AppRouter extends RootStackRouter {
   @override
   RouteType get defaultRouteType => RouteType.adaptive();
 
   @override
-  List<AutoRoute> get routes {
-    return [
-      AutoRoute(
-        page: HomeRoute.page,
-        path: '/',
-        guards: [
-          AuthGuard(),
-        ],
-      ),
-      AutoRoute(
-        page: SettingsRoute.page,
-        guards: [
-          AuthGuard(),
-        ],
-      ),
-      AutoRoute(
-        page: LogsRoute.page,
-        guards: [
-          AuthGuard(),
-        ],
-      ),
-      AutoRoute(
-        page: WelcomeRoute.page,
-      ),
-      AutoRoute(
-        page: SignInRoute.page,
-      ),
-      AutoRoute(
-        page: SignUpRoute.page,
-      ),
-    ];
-  }
+  List<AutoRoute> get routes => [
+        ///Home
+        AutoRoute(
+          page: HomeRoute.page,
+          initial: true,
+          guards: [
+            AuthGuard(),
+          ],
+        ),
+        AutoRoute(
+          page: SettingsRoute.page,
+        ),
+        AutoRoute(
+          page: LogsRoute.page,
+        ),
+
+        ///Welcome & auth
+        AutoRoute(
+          page: WelcomeRoute.page,
+        ),
+        AutoRoute(
+          page: SignInRoute.page,
+        ),
+        AutoRoute(
+          page: SignUpRoute.page,
+        ),
+      ];
 }
