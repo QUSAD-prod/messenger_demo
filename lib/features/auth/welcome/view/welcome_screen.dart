@@ -33,69 +33,88 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(),
       body: BlocBuilder<WelcomeBloc, WelcomeState>(
         bloc: _welcomeBloc,
         builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 28.0),
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Spacer(flex: 2),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 28.0),
-                    width: double.infinity,
-                    child: FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: Text(
-                        "Добро пожаловать в\nQUSAD Message!",
-                        style: TextStyle(fontWeight: FontWeight.w600),
-                        textAlign: TextAlign.center,
+          return Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 28.0),
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Spacer(flex: 3),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 28.0),
+                        width: double.infinity,
+                        child: FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: Text(
+                            "Добро пожаловать в\nQUSAD Message!",
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  SizedBox(height: 8.0),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 54.0),
-                    width: double.infinity,
-                    child: FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: Text(
-                        "Перед началом\nобщения нужно войти\nв аккаунт",
-                        style: TextStyle(fontWeight: FontWeight.w400),
-                        textAlign: TextAlign.center,
+                      SizedBox(height: 8.0),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 54.0),
+                        width: double.infinity,
+                        child: FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: Text(
+                            "Перед началом\nобщения нужно войти\nв аккаунт",
+                            style: TextStyle(fontWeight: FontWeight.w400),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  Spacer(),
-                  IconButton.filled(
-                    onPressed: () => context.pushRoute(const SignInRoute()),
-                    icon: Icon(Icons.navigate_next),
-                    iconSize: 42.0,
-                    tooltip: "Вход в аккаунт",
-                  ),
-                  Spacer(flex: 3),
-                  TextButton(
-                    // onPressed: () => ,
-                    onPressed: () => _welcomeBloc.add(
-                      WelcomeAnonymusAuthEvent(),
-                    ),
-                    child: Text(
-                      "Продолжить без аккаунта",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
+                      Spacer(),
+                      IconButton.filled(
+                        onPressed: () => context.pushRoute(const SignInRoute()),
+                        icon: Icon(Icons.navigate_next),
+                        iconSize: 42.0,
+                        tooltip: "Вход в аккаунт",
                       ),
-                    ),
+                      Spacer(flex: 4),
+                      TextButton(
+                        // onPressed: () => ,
+                        onPressed: () => _welcomeBloc.add(
+                          WelcomeAnonymusAuthEvent(),
+                        ),
+                        child: Text(
+                          "Продолжить без аккаунта",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
+              _loadingIndicator(state: state)
+            ],
           );
         },
       ),
     );
+  }
+}
+
+Widget _loadingIndicator({required state}) {
+  if (state is WelcomeLoadingState) {
+    return Container(
+      color: Colors.black.withAlpha(127),
+      width: double.infinity,
+      height: double.infinity,
+      child: Center(
+        child: CircularProgressIndicator.adaptive(),
+      ),
+    );
+  } else {
+    return Container();
   }
 }

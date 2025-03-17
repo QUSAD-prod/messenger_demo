@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:messenger_demo/core/strings/hive_strings.dart';
+import 'package:messenger_demo/features/settings/bloc/settings_bloc.dart';
 import 'package:messenger_demo/features/settings/widgets/settings_divider.dart';
 import 'package:messenger_demo/features/settings/widgets/settings_title_widget.dart';
 import 'package:messenger_demo/router/router.dart';
@@ -17,32 +19,39 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  final _settingsBloc = SettingsBloc();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Настройки'),
-      ),
-      body: ValueListenableBuilder(
-        valueListenable: Hive.box(HiveStrings.settingsBoxName).listenable(),
-        builder: (context, box, widget) {
-          return SingleChildScrollView(
-            child: Center(
-              child: Column(
-                children: [
-                  _themeGroup(context: context, box: box),
-                  SettingsDivider(),
-                  _accountGroup(),
-                  SettingsDivider(),
-                  _devGroup(),
-                  SettingsDivider(),
-                  _aboutGroup(box: box),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
+    return BlocBuilder<SettingsBloc, SettingsState>(
+      bloc: _settingsBloc,
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Настройки'),
+          ),
+          body: ValueListenableBuilder(
+            valueListenable: Hive.box(HiveStrings.settingsBoxName).listenable(),
+            builder: (context, box, widget) {
+              return SingleChildScrollView(
+                child: Center(
+                  child: Column(
+                    children: [
+                      _themeGroup(context: context, box: box),
+                      SettingsDivider(),
+                      _accountGroup(),
+                      SettingsDivider(),
+                      _devGroup(),
+                      SettingsDivider(),
+                      _aboutGroup(box: box),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 

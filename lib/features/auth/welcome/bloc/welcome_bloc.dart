@@ -14,7 +14,6 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
           emit(WelcomeLoadingState());
           GetIt.I<Talker>().info('Firebase: try signIn with temporary account."');
           GetIt.I<FirebaseAuth>().signInAnonymously();
-          emit(WelcomeLoadedState());
           GetIt.I<Talker>().info("Firebase: signed in with temporary account.");
         } on FirebaseAuthException catch (e) {
           switch (e.code) {
