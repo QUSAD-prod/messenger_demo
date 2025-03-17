@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class UnableDialogs {
-  static void show(BuildContext context) {
+class AppDialogs {
+  static void showUnableDialog(BuildContext context) {
     if (defaultTargetPlatform == TargetPlatform.android) {
       showDialog(
         context: context,

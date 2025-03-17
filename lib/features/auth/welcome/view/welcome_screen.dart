@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:messenger_demo/core/widgets/app_loading_indicator.dart';
 import 'package:messenger_demo/features/auth/welcome/bloc/welcome_bloc.dart';
 import 'package:messenger_demo/router/router.dart';
 
@@ -95,26 +96,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 ),
               ),
-              _loadingIndicator(state: state)
+              state is WelcomeLoadingState ? AppLoadingIndicator() : Container(),
             ],
           );
         },
       ),
     );
-  }
-}
-
-Widget _loadingIndicator({required state}) {
-  if (state is WelcomeLoadingState) {
-    return Container(
-      color: Colors.black.withAlpha(127),
-      width: double.infinity,
-      height: double.infinity,
-      child: Center(
-        child: CircularProgressIndicator.adaptive(),
-      ),
-    );
-  } else {
-    return Container();
   }
 }

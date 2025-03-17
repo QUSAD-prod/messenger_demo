@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:messenger_demo/core/widgets/unable_dialogs.dart';
-import 'package:messenger_demo/features/auth/widgets/social_login_buttons.dart';
+import 'package:messenger_demo/core/widgets/app_unable_dialogs.dart';
+import 'package:messenger_demo/features/auth/widgets/auth_social_login_buttons.dart';
 import 'package:messenger_demo/router/router.dart';
 
 @RoutePage()
@@ -71,16 +71,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   color: Theme.of(context).brightness == Brightness.light ? Colors.black.withAlpha(75) : Colors.white.withAlpha(75),
                 ),
               ),
-              SocialLoginButtons.google(
+              AuthSocialLoginButtons.google(
                 style: Theme.of(context).brightness == Brightness.light ? SocialLoginButtonStyle.black : SocialLoginButtonStyle.white,
-                onPressed: () {},
+                onPressed: () => AppDialogs.showUnableDialog(context), //TODO add
               ),
               SizedBox(
                 height: 8.0,
               ),
-              SocialLoginButtons.apple(
+              AuthSocialLoginButtons.apple(
                 style: Theme.of(context).brightness == Brightness.light ? SocialLoginButtonStyle.black : SocialLoginButtonStyle.white,
-                onPressed: () => UnableDialogs.show(context), //TODO add
+                onPressed: () => AppDialogs.showUnableDialog(context), //TODO add
               ),
               Spacer(flex: 2),
               TextButton(
