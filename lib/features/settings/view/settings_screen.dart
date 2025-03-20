@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:messenger_demo/core/strings/hive_strings.dart';
 import 'package:messenger_demo/core/widgets/app_unable_dialogs.dart';
@@ -77,9 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ListTile(
           trailing: Icon(Icons.logout_outlined),
           title: Text("Выйти из аккаунта"),
-          onTap: () async {
-            await GetIt.I<FirebaseAuth>().signOut(); //TODO
-          },
+          onTap: () => _settingsBloc.add(SettingsSignOutEvent()),
         ),
         ListTile(
           trailing: Icon(Icons.delete_outlined),

@@ -10,7 +10,7 @@ class AppFirebaseAuth {
     required VoidCallback onNotSignedIn,
   }) {
     try {
-      GetIt.I<Talker>().info('Firebase: checking auth status.');
+      GetIt.I<Talker>().info('Firebase: try check auth status.');
       onLoading();
       if (GetIt.I<FirebaseAuth>().currentUser != null) {
         GetIt.I<Talker>().info('Firebase: auth status is signed in.');
@@ -24,16 +24,37 @@ class AppFirebaseAuth {
     }
   }
 
-  static void signInAnonymously({
+  static Future<void> signOut({
     required VoidCallback onLoading,
     required VoidCallback onLoaded,
     required VoidCallback onFailure,
-  }) {
+  }) async {
+    try {
+      onLoading();
+      GetIt.I<Talker>().info('Firebase: try signOut."');
+      await GetIt.I<FirebaseAuth>().signOut();
+      GetIt.I<Talker>().info("Firebase: signed out.");
+      onLoaded();
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        default:
+          onFailure();
+          GetIt.I<Talker>().error("Firebase: Unknown error.\n${e.code}");
+      }
+    }
+  }
+
+  static Future<void> signInAnonymously({
+    required VoidCallback onLoading,
+    required VoidCallback onLoaded,
+    required VoidCallback onFailure,
+  }) async {
     try {
       onLoading();
       GetIt.I<Talker>().info('Firebase: try signIn with temporary account."');
-      GetIt.I<FirebaseAuth>().signInAnonymously();
+      await GetIt.I<FirebaseAuth>().signInAnonymously();
       GetIt.I<Talker>().info("Firebase: signed in with temporary account.");
+      onLoaded();
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case "operation-not-allowed":
@@ -47,13 +68,13 @@ class AppFirebaseAuth {
     }
   }
 
-  static void signUpWithEmailAndPassword({
+  static Future<void> signUpWithEmailAndPassword({
     required String email,
     required String password,
     required VoidCallback onLoading,
     required VoidCallback onLoaded,
     required VoidCallback onFailure,
-  }) {
+  }) async {
     try {
       onLoading();
       GetIt.I<Talker>().info('Firebase: try signUn with email and password."');
@@ -69,13 +90,13 @@ class AppFirebaseAuth {
     }
   }
 
-  static void signInWithEmailAndPassword({
+  static Future<void> signInWithEmailAndPassword({
     required String email,
     required String password,
     required VoidCallback onLoading,
     required VoidCallback onLoaded,
     required VoidCallback onFailure,
-  }) {
+  }) async {
     try {
       onLoading();
       GetIt.I<Talker>().info('Firebase: try signIn with email and password."');
