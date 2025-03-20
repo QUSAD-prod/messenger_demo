@@ -14,7 +14,14 @@ class MessengerDemoApp extends StatefulWidget {
 }
 
 class _MessengerDemoAppState extends State<MessengerDemoApp> {
-  final _appRouter = AppRouter();
+  late final AppRouter _appRouter;
+
+  @override
+  void initState() {
+    _appRouter = AppRouter();
+    GetIt.I.registerSingleton(_appRouter);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:messenger_demo/core/strings/hive_strings.dart';
+import 'package:messenger_demo/core/widgets/app_unable_dialogs.dart';
 import 'package:messenger_demo/features/settings/bloc/settings_bloc.dart';
 import 'package:messenger_demo/features/settings/widgets/settings_divider.dart';
 import 'package:messenger_demo/features/settings/widgets/settings_title_widget.dart';
@@ -59,6 +60,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        SizedBox(height: 8.0),
         Text("Версия приложения: ${box.get(HiveStrings.versionPath)}"),
         Text("Номер сборки: ${(box.get(HiveStrings.buildNumberPath) == "" ? "-" : box.get(HiveStrings.buildNumberPath))}"),
         Text("by QUSAD.prod"),
@@ -82,9 +84,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ListTile(
           trailing: Icon(Icons.delete_outlined),
           title: Text("Удалить аккаунт"),
-          onTap: () async {
-            //TODO
-          },
+          onTap: () => AppDialogs.showUnableDialog(context),
         ),
       ],
     );

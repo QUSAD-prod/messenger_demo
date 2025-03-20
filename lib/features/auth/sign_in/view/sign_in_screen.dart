@@ -82,7 +82,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             child: Text(
                               "Войти",
                               style: TextStyle(
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                                 fontSize: 16,
                               ),
                             ),
@@ -96,7 +96,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           child: Text(
                             "Забыли Пароль?",
                             style: TextStyle(
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                               fontSize: 16,
                             ),
                           ),
@@ -126,7 +126,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Text(
                       "Нет аккаунта? Зарегистрироваться",
                       style: TextStyle(
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                         fontSize: 16,
                       ),
                     ),

@@ -11,6 +11,22 @@
 part of 'router.dart';
 
 /// generated route for
+/// [AuthRedirectScreen]
+class AuthRedirectRoute extends PageRouteInfo<void> {
+  const AuthRedirectRoute({List<PageRouteInfo>? children})
+    : super(AuthRedirectRoute.name, initialChildren: children);
+
+  static const String name = 'AuthRedirectRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AuthRedirectScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [HomeScreen]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})

@@ -83,7 +83,9 @@ class SocialLoginButton extends StatelessWidget {
             ),
           ),
         ),
-        overlayColor: WidgetStateProperty.all(Colors.grey.shade100),
+        overlayColor: WidgetStateProperty.all(
+          Theme.of(context).brightness == Brightness.light ? Colors.black.withAlpha(50) : Colors.white.withAlpha(50),
+        ),
       ),
       child: Padding(
         padding: const EdgeInsets.all(15.0),

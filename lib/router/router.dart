@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:messenger_demo/features/auth/auth_redirect/view/auth_redirect_screen.dart';
 import 'package:messenger_demo/features/auth/sign_in/view/sign_in_screen.dart';
 import 'package:messenger_demo/features/auth/sign_up/view/sign_up_screen.dart';
 import 'package:messenger_demo/features/auth/welcome/view/welcome_screen.dart';
 import 'package:messenger_demo/features/home/view/home_screen.dart';
 import 'package:messenger_demo/features/logs/view/logs_screen.dart';
 import 'package:messenger_demo/features/settings/view/settings_screen.dart';
-import 'package:messenger_demo/router/auth_guard.dart';
 
 part 'router.gr.dart';
 
@@ -20,11 +20,11 @@ class AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
         ///Home
         AutoRoute(
-          page: HomeRoute.page,
+          page: AuthRedirectRoute.page,
           initial: true,
-          guards: [
-            AuthGuard(),
-          ],
+        ),
+        AutoRoute(
+          page: HomeRoute.page,
         ),
         AutoRoute(
           page: SettingsRoute.page,
