@@ -126,8 +126,8 @@ class AppTextFormField extends StatelessWidget {
           color: (Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white).withAlpha(200),
         ),
         floatingLabelStyle: TextStyle(
-          fontSize: 16.0,
-          color: Theme.of(context).colorScheme.primary,
+          fontSize: 18.0,
+          color: (Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white).withAlpha(200),
         ),
       ),
       keyboardType: keyboardType,

@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:messenger_demo/repository/app_firebase_auth.dart';
+import 'package:messenger_demo/repository/authentication_repository.dart';
 import 'package:messenger_demo/router/router.dart';
 
 part 'auth_redirect_event.dart';
@@ -10,7 +10,7 @@ class AuthRedirectBloc extends Bloc<AuthRedirectEvent, AuthRedirectState> {
   AuthRedirectBloc() : super(AuthRedirectInitialState()) {
     on<AuthRedirectCheckEvent>(
       (event, emit) {
-        AppFirebaseAuth.checkAuthStatus(
+        AuthenticationRepository.checkAuthStatus(
           onLoading: () => emit(AuthRedirectLoadingState()),
           onSignedIn: () {
             emit(AuthRedirectLoadedState());

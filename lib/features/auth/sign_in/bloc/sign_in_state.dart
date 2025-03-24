@@ -8,4 +8,12 @@ class SignInLoadingState extends SignInState {}
 
 class SignInLoadedState extends SignInState {}
 
-class SignInFailureState extends SignInState {}
+class SignInFailureState extends SignInState {
+  SignInFailureState({
+    this.emailError,
+    this.passwordError,
+    this.otherError,
+  });
+
+  String? emailError, passwordError, otherError;
+}

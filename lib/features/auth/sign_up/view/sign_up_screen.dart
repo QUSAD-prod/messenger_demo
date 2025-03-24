@@ -28,6 +28,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _passwordFocus = FocusNode();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
+
+    _signUpBloc.stream.listen(
+      (state) {
+        if (state is SignUpFailureState && state.otherError != null && mounted) {
+          final snackbar = SnackBar(
+            backgroundColor: Colors.red,
+            content: Text(
+              state.otherError!,
+              style: TextStyle(color: Colors.white),
+            ),
+            showCloseIcon: true,
+            closeIconColor: Colors.white,
+            behavior: SnackBarBehavior.floating,
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackbar);
+        }
+      },
+    );
     super.initState();
   }
 
@@ -62,21 +80,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Spacer(),
                       AppTextFormField(
                         labelText: "E-mail",
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
                         focusNode: _emailFocus,
                         controller: _emailController,
                         onTapOutside: (p0) => _emailFocus.unfocus(),
+                        forceErrorText: state is SignUpFailureState ? state.emailError : null,
                       ),
-                      SizedBox(height: 8.0),
+                      SizedBox(height: 12.0),
                       AppTextFormField(
                         labelText: "Password",
+                        keyboardType: TextInputType.visiblePassword,
+                        textInputAction: TextInputAction.done,
                         obscureText: true,
                         focusNode: _passwordFocus,
                         controller: _passwordController,
                         onTapOutside: (p0) => _passwordFocus.unfocus(),
+                        forceErrorText: state is SignUpFailureState ? state.passwordError : null,
                       ),
-                      SizedBox(height: 12.0),
+                      SizedBox(height: 16.0),
                       FilledButton(
-                        onPressed: () {},
+                        onPressed: () => _signUpBloc.add(
+                          SignUpEmailPasswordEvent(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          ),
+                        ),
                         child: Center(
                           child: Text(
                             "Зарегистрироваться",
