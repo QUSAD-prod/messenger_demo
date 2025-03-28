@@ -5,22 +5,67 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 class AuthenticationRepository {
-  static void checkAuthStatus({
+  static Future<void> checkAuthStatus({
     required VoidCallback onLoading,
+    required VoidCallback onLoaded,
     required VoidCallback onSignedIn,
     required VoidCallback onNotSignedIn,
-  }) {
+    required VoidCallback onNotVerified,
+  }) async {
     try {
       GetIt.I<Talker>().info('Firebase: try check auth status.');
       onLoading();
       if (GetIt.I<FirebaseAuth>().currentUser != null) {
-        GetIt.I<Talker>().info('Firebase: auth status is signed in.');
-        onSignedIn();
+        await GetIt.I<FirebaseAuth>().currentUser!.reload();
+        if (GetIt.I<FirebaseAuth>().currentUser!.emailVerified || GetIt.I<FirebaseAuth>().currentUser!.isAnonymous) {
+          onLoaded();
+          GetIt.I<Talker>().info('Firebase: auth status is signed in.');
+          onSignedIn();
+        } else {
+          onLoaded();
+          GetIt.I<Talker>().info('Firebase: auth status is signed in with not verified email.');
+          onNotVerified();
+        }
       } else {
+        onLoaded();
         GetIt.I<Talker>().info('Firebase: auth status is not signed in.');
         onNotSignedIn();
       }
     } on FirebaseAuthException catch (e) {
+      GetIt.I<Talker>().error("Firebase: unknown error.\n${e.code}");
+    }
+  }
+
+  static Future<void> checkEmailVerifyStatus({
+    required VoidCallback onVerified,
+  }) async {
+    try {
+      GetIt.I<Talker>().info('Firebase: try check email verify status.');
+      await GetIt.I<FirebaseAuth>().currentUser!.reload();
+      if (GetIt.I<FirebaseAuth>().currentUser!.emailVerified) {
+        GetIt.I<Talker>().info('Firebase: email is verified.');
+        onVerified();
+      } else {
+        GetIt.I<Talker>().info('Firebase: email is not verified.');
+      }
+    } on FirebaseAuthException catch (e) {
+      GetIt.I<Talker>().error("Firebase: unknown error.\n${e.code}");
+    }
+  }
+
+  static Future<void> sendVerificationEmail({
+    required VoidCallback onLoading,
+    required VoidCallback onLoaded,
+    required VoidCallback onFailure,
+  }) async {
+    try {
+      GetIt.I<Talker>().info('Firebase: try send verification email.');
+      onLoading();
+      await GetIt.I<FirebaseAuth>().currentUser?.sendEmailVerification();
+      onLoaded();
+      GetIt.I<Talker>().info('Firebase: sent verification email.');
+    } on FirebaseAuthException catch (e) {
+      onFailure();
       GetIt.I<Talker>().error("Firebase: unknown error.\n${e.code}");
     }
   }
@@ -35,6 +80,26 @@ class AuthenticationRepository {
       GetIt.I<Talker>().info('Firebase: try signOut."');
       await GetIt.I<FirebaseAuth>().signOut();
       GetIt.I<Talker>().info("Firebase: signed out.");
+      onLoaded();
+    } on FirebaseAuthException catch (e) {
+      onFailure();
+      switch (e.code) {
+        default:
+          GetIt.I<Talker>().error("Firebase: unknown error.\n${e.code}");
+      }
+    }
+  }
+
+  static Future<void> deleteAccount({
+    required VoidCallback onLoading,
+    required VoidCallback onLoaded,
+    required VoidCallback onFailure,
+  }) async {
+    try {
+      onLoading();
+      GetIt.I<Talker>().info('Firebase: try delete account."');
+      await GetIt.I<FirebaseAuth>().currentUser?.delete();
+      GetIt.I<Talker>().info("Firebase: account deleted.");
       onLoaded();
     } on FirebaseAuthException catch (e) {
       onFailure();

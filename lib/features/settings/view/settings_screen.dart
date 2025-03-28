@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:messenger_demo/core/strings/hive_strings.dart';
-import 'package:messenger_demo/core/widgets/app_unable_dialogs.dart';
+import 'package:messenger_demo/core/widgets/app_dialogs.dart';
+import 'package:messenger_demo/core/widgets/app_loading_indicator.dart';
 import 'package:messenger_demo/features/settings/bloc/settings_bloc.dart';
 import 'package:messenger_demo/features/settings/widgets/settings_divider.dart';
 import 'package:messenger_demo/features/settings/widgets/settings_title_widget.dart';
@@ -25,30 +26,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return BlocBuilder<SettingsBloc, SettingsState>(
       bloc: _settingsBloc,
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('Настройки'),
-          ),
-          body: ValueListenableBuilder(
-            valueListenable: Hive.box(HiveStrings.settingsBoxName).listenable(),
-            builder: (context, box, widget) {
-              return SingleChildScrollView(
-                child: Center(
-                  child: Column(
-                    children: [
-                      _themeGroup(context: context, box: box),
-                      SettingsDivider(),
-                      _accountGroup(),
-                      SettingsDivider(),
-                      _devGroup(),
-                      SettingsDivider(),
-                      _aboutGroup(box: box),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
+        return Stack(
+          children: [
+            Scaffold(
+              appBar: AppBar(
+                title: Text('Настройки'),
+              ),
+              body: ValueListenableBuilder(
+                valueListenable: Hive.box(HiveStrings.settingsBoxName).listenable(),
+                builder: (context, box, widget) {
+                  return SingleChildScrollView(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          _themeGroup(context: context, box: box),
+                          SettingsDivider(),
+                          _accountGroup(),
+                          SettingsDivider(),
+                          _devGroup(),
+                          SettingsDivider(),
+                          _aboutGroup(box: box),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            state is SettingsLoadingState ? AppLoadingIndicator() : Container(),
+          ],
         );
       },
     );
@@ -80,7 +86,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ListTile(
           trailing: Icon(Icons.delete_outlined),
           title: Text("Удалить аккаунт"),
-          onTap: () => AppDialogs.showUnableDialog(context),
+          onTap: () => AppDialogs.showConfirmDialog(
+            context,
+            title: "Удалить аккаунт?",
+            content: "Восстановить аккаунт будет невозможно",
+            onConfirm: () => _settingsBloc.add(SettingsDeleteAccountEvent()),
+          ),
         ),
       ],
     );

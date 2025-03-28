@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:messenger_demo/core/widgets/app_loading_indicator.dart';
 import 'package:messenger_demo/core/widgets/app_text_form_field.dart';
-import 'package:messenger_demo/core/widgets/app_unable_dialogs.dart';
+import 'package:messenger_demo/core/widgets/app_dialogs.dart';
 import 'package:messenger_demo/features/auth/sign_in/bloc/sign_in_bloc.dart';
 import 'package:messenger_demo/features/auth/widgets/auth_social_login_buttons.dart';
 import 'package:messenger_demo/router/router.dart';

@@ -9,23 +9,22 @@ part 'auth_redirect_state.dart';
 class AuthRedirectBloc extends Bloc<AuthRedirectEvent, AuthRedirectState> {
   AuthRedirectBloc() : super(AuthRedirectInitialState()) {
     on<AuthRedirectCheckEvent>(
-      (event, emit) {
-        AuthenticationRepository.checkAuthStatus(
+      (event, emit) async {
+        await AuthenticationRepository.checkAuthStatus(
           onLoading: () => emit(AuthRedirectLoadingState()),
-          onSignedIn: () {
-            emit(AuthRedirectLoadedState());
-            GetIt.I<AppRouter>().pushAndPopUntil(
-              HomeRoute(),
-              predicate: (route) => false,
-            );
-          },
-          onNotSignedIn: () {
-            emit(AuthRedirectLoadedState());
-            GetIt.I<AppRouter>().pushAndPopUntil(
-              WelcomeRoute(),
-              predicate: (route) => false,
-            );
-          },
+          onLoaded: () => emit(AuthRedirectLoadedState()),
+          onSignedIn: () => GetIt.I<AppRouter>().pushAndPopUntil(
+            HomeRoute(),
+            predicate: (route) => false,
+          ),
+          onNotSignedIn: () => GetIt.I<AppRouter>().pushAndPopUntil(
+            WelcomeRoute(),
+            predicate: (route) => false,
+          ),
+          onNotVerified: () => GetIt.I<AppRouter>().pushAndPopUntil(
+            ConfirmEmailRoute(),
+            predicate: (route) => false,
+          ),
         );
       },
     );

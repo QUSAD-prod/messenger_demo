@@ -27,6 +27,22 @@ class AuthRedirectRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ConfirmEmailScreen]
+class ConfirmEmailRoute extends PageRouteInfo<void> {
+  const ConfirmEmailRoute({List<PageRouteInfo>? children})
+    : super(ConfirmEmailRoute.name, initialChildren: children);
+
+  static const String name = 'ConfirmEmailRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ConfirmEmailScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [HomeScreen]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})

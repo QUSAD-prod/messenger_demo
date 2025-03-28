@@ -21,5 +21,18 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         onFailure: () => emit(SettingsFailureState()),
       ),
     );
+    on<SettingsDeleteAccountEvent>(
+      (event, emit) async => await AuthenticationRepository.deleteAccount(
+        onLoading: () => emit(SettingsLoadingState()),
+        onLoaded: () {
+          emit(SettingsLoadedState());
+          GetIt.I<AppRouter>().pushAndPopUntil(
+            AuthRedirectRoute(),
+            predicate: (route) => false,
+          );
+        },
+        onFailure: () => emit(SettingsFailureState()),
+      ),
+    );
   }
 }
