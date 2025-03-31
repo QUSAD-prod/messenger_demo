@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:messenger_demo/router/router.dart';
 
 @RoutePage()
@@ -18,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text("Чаты"),
         actions: [
           IconButton(
-            onPressed: () => context.pushRoute(const SettingsRoute()),
+            onPressed: () => GetIt.I<AppRouter>().push(const SettingsRoute()),
             tooltip: "Настройки",
             icon: Icon(Icons.settings),
           ),

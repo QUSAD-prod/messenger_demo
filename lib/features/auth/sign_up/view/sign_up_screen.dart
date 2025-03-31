@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:messenger_demo/core/widgets/app_loading_indicator.dart';
 import 'package:messenger_demo/core/widgets/app_text_form_field.dart';
 import 'package:messenger_demo/core/widgets/app_dialogs.dart';
@@ -22,6 +25,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late FocusNode _emailFocus, _passwordFocus;
   late TextEditingController _emailController, _passwordController;
 
+  late StreamSubscription<SignUpState> _streamSubscription;
+
   @override
   void initState() {
     _emailFocus = FocusNode();
@@ -29,7 +34,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
 
-    _signUpBloc.stream.listen(
+    _streamSubscription = _signUpBloc.stream.listen(
       (state) {
         if (state is SignUpFailureState && state.otherError != null && mounted) {
           final snackbar = SnackBar(
@@ -47,6 +52,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
     );
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _emailFocus.dispose();
+    _passwordFocus.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+
+    _streamSubscription.cancel();
+    super.dispose();
   }
 
   @override
@@ -136,7 +152,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       Spacer(flex: 2),
                       TextButton(
-                        onPressed: () => context.replaceRoute(const SignInRoute()),
+                        onPressed: () => GetIt.I<AppRouter>().replace(const SignInRoute()),
                         child: Text(
                           "Уже есть аккаунт? Войти",
                           style: TextStyle(

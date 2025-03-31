@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:messenger_demo/features/auth/auth_redirect/view/auth_redirect_screen.dart';
 import 'package:messenger_demo/features/auth/confirm_email/view/confirm_email_screen.dart';
+import 'package:messenger_demo/features/auth/reset_password/view/reset_password_screen.dart';
 import 'package:messenger_demo/features/auth/sign_in/view/sign_in_screen.dart';
 import 'package:messenger_demo/features/auth/sign_up/view/sign_up_screen.dart';
 import 'package:messenger_demo/features/auth/welcome/view/welcome_screen.dart';
@@ -31,6 +32,9 @@ class AppRouter extends RootStackRouter {
         ),
         AutoRoute(
           page: SignUpRoute.page,
+        ),
+        AutoRoute(
+          page: ResetPasswordRoute.page,
         ),
         AutoRoute(
           page: ConfirmEmailRoute.page,

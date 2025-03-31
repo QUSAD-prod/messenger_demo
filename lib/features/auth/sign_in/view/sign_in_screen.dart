@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:messenger_demo/core/widgets/app_loading_indicator.dart';
 import 'package:messenger_demo/core/widgets/app_text_form_field.dart';
 import 'package:messenger_demo/core/widgets/app_dialogs.dart';
@@ -22,6 +25,8 @@ class _SignInScreenState extends State<SignInScreen> {
   late FocusNode _emailFocus, _passwordFocus;
   late TextEditingController _emailController, _passwordController;
 
+  late StreamSubscription<SignInState> _streamSubscription;
+
   @override
   void initState() {
     _emailFocus = FocusNode();
@@ -29,7 +34,7 @@ class _SignInScreenState extends State<SignInScreen> {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
 
-    _signInBloc.stream.listen(
+    _streamSubscription = _signInBloc.stream.listen(
       (state) {
         if (state is SignInFailureState && state.otherError != null && mounted) {
           final snackbar = SnackBar(
@@ -47,6 +52,17 @@ class _SignInScreenState extends State<SignInScreen> {
       },
     );
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _emailFocus.dispose();
+    _passwordFocus.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+
+    _streamSubscription.cancel();
+    super.dispose();
   }
 
   @override
@@ -123,7 +139,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           SizedBox(width: 12.0),
                           TextButton(
-                            onPressed: () => AppDialogs.showUnableDialog(context), //TODO add
+                            onPressed: () => GetIt.I<AppRouter>().push(const ResetPasswordRoute()),
                             child: Center(
                               child: Text(
                                 "Забыли Пароль?",
@@ -154,7 +170,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       Spacer(flex: 2),
                       TextButton(
-                        onPressed: () => context.replaceRoute(const SignUpRoute()),
+                        onPressed: () => GetIt.I<AppRouter>().replace(const SignUpRoute()),
                         child: Text(
                           "Нет аккаунта? Зарегистрироваться",
                           style: TextStyle(

@@ -73,7 +73,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                       Spacer(),
                       IconButton.filled(
-                        onPressed: () => context.pushRoute(const SignInRoute()),
+                        onPressed: () => GetIt.I<AppRouter>().push(const SignInRoute()),
                         icon: Icon(Icons.navigate_next),
                         iconSize: 42.0,
                         tooltip: "Вход в аккаунт",
