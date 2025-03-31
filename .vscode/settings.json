@@ -3,4 +3,8 @@
     "dart.flutterSdkPaths": [
         "/Users/qusadprod/development/flutter"
     ],
+    "flutterTools.displayGetxContextMenu": false,
+    "flutterTools.displayMobxContextMenu": false,
+    "flutterTools.displayRiverpodContextMenu": false,
+    "flutterTools.displayModularContextMenu": false,
 }

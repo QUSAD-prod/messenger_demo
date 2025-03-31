@@ -9,7 +9,7 @@ import 'package:messenger_demo/features/home/view/home_screen.dart';
 import 'package:messenger_demo/features/logs/view/logs_screen.dart';
 import 'package:messenger_demo/features/settings/view/settings_screen.dart';
 
-part 'router.gr.dart';
+part 'app_router.gr.dart';
 
 @AutoRouterConfig(
   replaceInRouteName: 'Screen|Page,Route',
