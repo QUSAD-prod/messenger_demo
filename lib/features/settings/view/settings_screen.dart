@@ -9,7 +9,7 @@ import 'package:messenger_demo/core/widgets/app_loading_indicator.dart';
 import 'package:messenger_demo/features/settings/bloc/settings_bloc.dart';
 import 'package:messenger_demo/features/settings/widgets/settings_divider.dart';
 import 'package:messenger_demo/features/settings/widgets/settings_title_widget.dart';
-import 'package:messenger_demo/router/router.dart';
+import 'package:messenger_demo/router/app_router.dart';
 
 @RoutePage()
 class SettingsScreen extends StatefulWidget {

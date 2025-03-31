@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:messenger_demo/core/widgets/app_loading_indicator.dart';
 import 'package:messenger_demo/features/auth/welcome/bloc/welcome_bloc.dart';
-import 'package:messenger_demo/router/router.dart';
+import 'package:messenger_demo/router/app_router.dart';
 
 @RoutePage()
 class WelcomeScreen extends StatefulWidget {

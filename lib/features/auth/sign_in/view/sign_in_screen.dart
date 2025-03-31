@@ -9,7 +9,7 @@ import 'package:messenger_demo/core/widgets/app_text_form_field.dart';
 import 'package:messenger_demo/core/widgets/app_dialogs.dart';
 import 'package:messenger_demo/features/auth/sign_in/bloc/sign_in_bloc.dart';
 import 'package:messenger_demo/features/auth/widgets/auth_social_login_buttons.dart';
-import 'package:messenger_demo/router/router.dart';
+import 'package:messenger_demo/router/app_router.dart';
 
 @RoutePage()
 class SignInScreen extends StatefulWidget {

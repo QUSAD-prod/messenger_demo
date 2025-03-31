@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:messenger_demo/repository/authentication_repository.dart';
-import 'package:messenger_demo/router/router.dart';
+import 'package:messenger_demo/router/app_router.dart';
 
 part 'sign_in_event.dart';
 part 'sign_in_state.dart';

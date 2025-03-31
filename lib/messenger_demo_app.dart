@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:messenger_demo/core/strings/hive_strings.dart';
 import 'package:messenger_demo/core/theme/theme.dart';
-import 'package:messenger_demo/router/router.dart';
+import 'package:messenger_demo/router/app_router.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 class MessengerDemoApp extends StatefulWidget {
