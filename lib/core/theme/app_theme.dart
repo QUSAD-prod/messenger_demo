@@ -15,9 +15,15 @@ class AppTheme {
       foregroundColor: AppColors.lightPrimaryText,
       centerTitle: false,
       titleTextStyle: TextStyle(
-        fontSize: 32,
+        fontSize: 28,
         fontWeight: FontWeight.w600,
         color: AppColors.lightPrimaryText,
+      ),
+      actionsIconTheme: IconThemeData(
+        size: 28,
+      ),
+      iconTheme: IconThemeData(
+        size: 28,
       ),
     ),
     textTheme: TextTheme(
@@ -43,9 +49,15 @@ class AppTheme {
       foregroundColor: AppColors.darkPrimaryText,
       centerTitle: false,
       titleTextStyle: TextStyle(
-        fontSize: 32,
+        fontSize: 28,
         fontWeight: FontWeight.w600,
         color: AppColors.darkPrimaryText,
+      ),
+      actionsIconTheme: IconThemeData(
+        size: 28,
+      ),
+      iconTheme: IconThemeData(
+        size: 28,
       ),
     ),
     textTheme: TextTheme(

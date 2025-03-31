@@ -79,15 +79,24 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         tooltip: "Вход в аккаунт",
                       ),
                       Spacer(flex: 4),
+                      // TextButton(
+                      //   onPressed: () => _welcomeBloc.add(
+                      //     WelcomeAnonymusAuthEvent(),
+                      //   ),
+                      //   child: Text(
+                      //     "Продолжить без аккаунта",
+                      //     style: TextStyle(
+                      //       fontWeight: FontWeight.w600,
+                      //       fontSize: 16,
+                      //     ),
+                      //   ),
+                      // ),
                       TextButton(
-                        // onPressed: () => ,
-                        onPressed: () => _welcomeBloc.add(
-                          WelcomeAnonymusAuthEvent(),
-                        ),
+                        onPressed: () => GetIt.I<AppRouter>().replace(const SignUpRoute()),
                         child: Text(
-                          "Продолжить без аккаунта",
+                          "Нет аккаунта? Зарегистрироваться",
                           style: TextStyle(
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w500,
                             fontSize: 16,
                           ),
                         ),

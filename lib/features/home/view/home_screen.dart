@@ -17,13 +17,30 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Чаты"),
-        actions: [
-          IconButton(
-            onPressed: () => GetIt.I<AppRouter>().push(const SettingsRoute()),
-            tooltip: "Настройки",
-            icon: Icon(Icons.settings),
-          ),
-        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(),
+              child: Text(
+                'Drawer Header',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.account_circle),
+              title: const Text('Аккаунт'),
+              onTap: () {}, //TODO add profile
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Настройки'),
+              onTap: () => GetIt.I<AppRouter>().push(const SettingsRoute()),
+            ),
+          ],
+        ),
       ),
       body: Container(),
     );
