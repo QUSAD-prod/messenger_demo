@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:messenger_demo/core/strings/hive_strings.dart';
-import 'package:messenger_demo/core/theme/colors.dart';
+import 'package:messenger_demo/core/theme/app_colors.dart';
 
-class GlobalTheme {
+class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
