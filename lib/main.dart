@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:messenger_demo/core/models/settings_model.dart';
+import 'package:messenger_demo/core/models/theme_mode_adapter.dart';
 import 'package:messenger_demo/core/strings/hive_strings.dart';
 import 'package:messenger_demo/firebase_options.dart';
 import 'package:messenger_demo/messenger_demo_app.dart';
@@ -26,26 +28,28 @@ void main() {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
     await Hive.initFlutter();
-    Box settingsBox = await Hive.openBox(HiveStrings.settingsBoxName);
-    settingsBox.putAll(
-      {
-        HiveStrings.appNamePath: packageInfo.appName,
-        HiveStrings.packageNamePath: packageInfo.packageName,
-        HiveStrings.versionPath: packageInfo.version,
-        HiveStrings.buildNumberPath: packageInfo.buildNumber,
-      },
+    Hive.registerAdapter(SettingsModelAdapter());
+    Hive.registerAdapter(ThemeModeAdapter());
+    Box settingsBox = await Hive.openBox<SettingsModel>(HiveStrings.settingsBoxName);
+    settingsBox.put(
+      HiveStrings.settingsBoxKey,
+      settingsBox.get(HiveStrings.settingsBoxKey, defaultValue: SettingsModel()).copyWith(
+            appName: packageInfo.appName,
+            packageName: packageInfo.packageName,
+            version: packageInfo.version,
+            buildNumber: packageInfo.buildNumber,
+          ),
     );
 
     final FirebaseApp firebaseApp = await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    GetIt.I.registerSingleton(firebaseApp);
-    final FirebaseAuth firebaseAuth = FirebaseAuth.instanceFor(app: GetIt.I<FirebaseApp>());
-    GetIt.I.registerSingleton(firebaseAuth);
-
+    final FirebaseAuth firebaseAuth = FirebaseAuth.instanceFor(app: firebaseApp);
     if (shouldUseFirebaseEmulator) {
-      await GetIt.I<FirebaseAuth>().useAuthEmulator('localhost', 9099);
+      await firebaseAuth.useAuthEmulator('localhost', 9099);
     }
+    GetIt.I.registerSingleton(firebaseApp);
+    GetIt.I.registerSingleton(firebaseAuth);
 
     Bloc.observer = TalkerBlocObserver(
       talker: talker,

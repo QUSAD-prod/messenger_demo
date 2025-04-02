@@ -22,6 +22,7 @@ dependencies:
   package_info_plus: ^8.3.0
   google_sign_in: ^6.3.0
   flutter_spinkit: ^5.2.1
+  flutter_svg_provider: ^1.0.7
 
 dependency_overrides:
   source_gen: ^2.0.0
@@ -40,6 +41,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/svg/
 
   fonts:
     - family: Gilroy

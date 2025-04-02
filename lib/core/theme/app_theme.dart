@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:messenger_demo/core/strings/hive_strings.dart';
 import 'package:messenger_demo/core/theme/app_colors.dart';
 
 class AppTheme {
@@ -60,6 +59,7 @@ class AppTheme {
         size: 28,
       ),
     ),
+    navigationDrawerTheme: NavigationDrawerThemeData(),
     textTheme: TextTheme(
       bodyLarge: TextStyle(color: AppColors.darkPrimaryText),
       bodyMedium: TextStyle(color: AppColors.darkPrimaryText),
@@ -70,15 +70,4 @@ class AppTheme {
       surface: AppColors.darkChatBackground,
     ),
   );
-
-  static ThemeMode getTheme(String data) {
-    switch (data) {
-      case HiveStrings.themeLight:
-        return ThemeMode.light;
-      case HiveStrings.themeDark:
-        return ThemeMode.dark;
-      default:
-        return ThemeMode.system;
-    }
-  }
 }

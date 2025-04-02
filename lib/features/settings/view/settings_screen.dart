@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:messenger_demo/core/models/settings_model.dart';
 import 'package:messenger_demo/core/strings/hive_strings.dart';
 import 'package:messenger_demo/core/widgets/app_dialogs.dart';
 import 'package:messenger_demo/core/widgets/app_loading_indicator.dart';
@@ -34,7 +35,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: Text('Настройки'),
               ),
               body: ValueListenableBuilder(
-                valueListenable: Hive.box(HiveStrings.settingsBoxName).listenable(),
+                valueListenable: Hive.box<SettingsModel>(HiveStrings.settingsBoxName).listenable(),
                 builder: (context, box, widget) {
                   return SingleChildScrollView(
                     child: Center(
@@ -61,13 +62,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Column _aboutGroup({required Box<dynamic> box}) {
+  Column _aboutGroup({required Box<SettingsModel> box}) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(height: 8.0),
-        Text("Версия приложения: ${box.get(HiveStrings.versionPath)}"),
-        Text("Номер сборки: ${(box.get(HiveStrings.buildNumberPath) == "" ? "-" : box.get(HiveStrings.buildNumberPath))}"),
+        Text("Версия приложения: ${box.get(HiveStrings.settingsBoxKey, defaultValue: SettingsModel())!.version}"),
+        Text("Номер сборки: ${(box.get(HiveStrings.settingsBoxKey, defaultValue: SettingsModel())!.buildNumber)}"),
         Text("by QUSAD.prod"),
       ],
     );
@@ -98,8 +99,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Widget _themeGroup({required BuildContext context, required Box box}) {
-    String currentValue = box.get(HiveStrings.themePath, defaultValue: HiveStrings.themeSystem);
+  Widget _themeGroup({required BuildContext context, required Box<SettingsModel> box}) {
+    SettingsModel currentValue = box.get(HiveStrings.settingsBoxKey, defaultValue: SettingsModel())!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -107,23 +108,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
         RadioListTile(
           title: Text("Светлая"),
           secondary: Icon(Icons.light_mode_outlined),
-          value: HiveStrings.themeLight,
-          groupValue: currentValue,
-          onChanged: (value) => box.put(HiveStrings.themePath, HiveStrings.themeLight),
+          value: ThemeMode.light,
+          groupValue: currentValue.themeMode,
+          onChanged: (value) => box.put(HiveStrings.settingsBoxKey, currentValue.copyWith(themeMode: ThemeMode.light)),
         ),
         RadioListTile(
           title: Text("Тёмная"),
           secondary: Icon(Icons.mode_night_outlined),
-          value: HiveStrings.themeDark,
-          groupValue: currentValue,
-          onChanged: (value) => box.put(HiveStrings.themePath, HiveStrings.themeDark),
+          value: ThemeMode.dark,
+          groupValue: currentValue.themeMode,
+          onChanged: (value) => box.put(HiveStrings.settingsBoxKey, currentValue.copyWith(themeMode: ThemeMode.dark)),
         ),
         RadioListTile(
           title: Text("Системная"),
           secondary: Icon(Icons.sync_outlined),
-          value: HiveStrings.themeSystem,
-          groupValue: currentValue,
-          onChanged: (value) => box.put(HiveStrings.themePath, HiveStrings.themeSystem),
+          value: ThemeMode.system,
+          groupValue: currentValue.themeMode,
+          onChanged: (value) => box.put(HiveStrings.settingsBoxKey, currentValue.copyWith(themeMode: ThemeMode.system)),
         ),
       ],
     );

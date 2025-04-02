@@ -1,11 +1,25 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'home_bloc.dart';
 
-abstract class HomeState {}
+class HomeState extends Equatable {
+  const HomeState({
+    this.user,
+    this.loading = false,
+  });
 
-class HomeInitialState extends HomeState {}
+  final User? user;
+  final bool loading;
 
-class HomeLoadingState extends HomeState {}
+  @override
+  List<Object?> get props => [user, loading];
 
-class HomeLoadedState extends HomeState {}
-
-class HomeFailureState extends HomeState {}
+  HomeState copyWith({
+    User? user,
+    bool? loading,
+  }) {
+    return HomeState(
+      user: user ?? this.user,
+      loading: loading ?? this.loading,
+    );
+  }
+}
